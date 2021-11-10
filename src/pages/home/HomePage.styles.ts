@@ -17,10 +17,27 @@ export const Card = styled.View`
   min-height: 400px;
   align-self: center;
   padding: 10px;
+  justify-content: space-evenly;
   background-color: ${(props) => props.theme.colors.card};
 `;
 
-export const Title = styled.View`
+export const Title = styled.Text`
   font-size: 16px;
+  font-weight: bold;
+`;
+
+export const ExchangeButton = styled.Pressable`
+  background-color: ${(props) => props.theme.colors.primaryColor};
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 40%;
+  height: 50px;
+  border-radius: 25px;
+`;
+
+export const ButtonText = styled.Text`
+  font-size: 16px;
+  color: white;
   font-weight: bold;
 `;
