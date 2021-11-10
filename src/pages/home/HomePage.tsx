@@ -1,8 +1,15 @@
 import React from 'react';
-import { Container } from './HomePage.styles';
+import { WalletSelector } from 'src/components';
+import { Container, Card, Title } from './HomePage.styles';
 
 export function HomePage() {
   return (
-    <Container />
+    <Container>
+      <Card>
+        <Title>Exchange your money!</Title>
+        <WalletSelector />
+
+      </Card>
+    </Container>
   );
 }
