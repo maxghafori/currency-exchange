@@ -9,6 +9,7 @@
     "lint": "eslint --max-warnings=0 '*.{ts,tsx}'"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
     "expo": "~43.0.2",
     "expo-splash-screen": "~0.13.5",
     "expo-status-bar": "~1.1.0",
@@ -22,6 +23,7 @@
     "react-native-screens": "~3.8.0",
     "react-native-svg": "^12.1.1",
     "react-native-web": "0.17.1",
+    "react-redux": "^7.2.6",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {

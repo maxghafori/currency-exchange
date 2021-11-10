@@ -1,5 +1,3 @@
-import { WalletType } from 'src/types';
-
 export const wallets = [
   {
     symbol: '$',
@@ -19,4 +17,4 @@ export const wallets = [
     name: 'British Pound',
     balance: 10,
   },
-] as WalletType[];
+];

@@ -19,7 +19,7 @@ export const RateWrapper = styled.View`
   border-radius: 20px;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  min-width: 30%;
   padding: 5px;
   border-width: 1px;
   border-color: lightgrey;

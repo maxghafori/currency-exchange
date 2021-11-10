@@ -1,9 +1,10 @@
 import { FlatList, Modal } from 'react-native';
 import React, { useCallback } from 'react';
 import { WalletType } from 'src/types';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/redux';
 import { CenteredView, ModalContainer, ModalTitle } from './WalletSelector.styles';
 import { WalletItem } from './WalletItem';
-import { wallets } from './configs';
 
 interface WalletsModalProps{
     open:boolean,
@@ -12,11 +13,13 @@ interface WalletsModalProps{
 }
 
 export const WalletsModals = ({ open, onClose, onWalletClick }:WalletsModalProps) => {
+  const currencies = useSelector((state:RootState) => state.exchangeState.currencies);
+
   const renderItem = useCallback(({ item }) => (
     <WalletItem
       item={item}
-      onClick={() => {
-        onWalletClick(item);
+      onClick={(wallet) => {
+        onWalletClick(wallet);
         onClose();
       }}
     />
@@ -27,7 +30,7 @@ export const WalletsModals = ({ open, onClose, onWalletClick }:WalletsModalProps
       <CenteredView>
         <ModalContainer>
           <ModalTitle>Wallets</ModalTitle>
-          <FlatList data={wallets} renderItem={renderItem} />
+          <FlatList data={Object.values(currencies)} renderItem={renderItem} />
         </ModalContainer>
       </CenteredView>
     </Modal>
