@@ -11,14 +11,14 @@ export const Row = styled.View`
   justify-content: space-between;
 `;
 
-export const CenteredView = styled.View`
+export const CenteredView = styled.Pressable`
   flex:1;
   justify-content: flex-end;
   align-items: center;
   margin-top: 22px;
 `;
 
-export const ModalContainer = styled.View`
+export const ModalContainer = styled.Pressable`
   width: 100%;
   max-width:${(props) => props.theme.size.maxWidth};
   align-self: center;

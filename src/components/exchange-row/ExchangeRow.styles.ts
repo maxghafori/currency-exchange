@@ -25,3 +25,10 @@ export const Type = styled.Text`
   font-size: 18px;
   margin-left: 5px;
 `;
+
+export const Error = styled.Text`
+  font-size: 12px;
+  color: darkred;
+  position: absolute;
+  bottom: -20px;
+`;

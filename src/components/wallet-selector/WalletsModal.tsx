@@ -27,7 +27,7 @@ export const WalletsModals = ({ open, onClose, onWalletClick }:WalletsModalProps
 
   return (
     <Modal animationType="slide" transparent visible={open} onRequestClose={onClose}>
-      <CenteredView>
+      <CenteredView onPress={onClose}>
         <ModalContainer>
           <ModalTitle>Wallets</ModalTitle>
           <FlatList data={Object.values(currencies)} renderItem={renderItem} />

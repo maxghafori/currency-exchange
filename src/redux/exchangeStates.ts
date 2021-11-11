@@ -2,14 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CurrencyType, WalletType } from 'src/types';
 
 interface ExchangeStatesType {
-    currencies: CurrencyType;
-    wallets: WalletType;
-    fromWallet: string,
-    toWallet: string,
-    fromAmount: string,
-    toAmount: string,
-    exchangeRate: number,
-
+  currencies: CurrencyType;
+  wallets: WalletType;
+  fromWallet: string,
+  toWallet: string,
+  fromAmount: string,
+  toAmount: string,
+  exchangeRate: number,
+  error:string
 }
 
 const initialState: ExchangeStatesType = {
@@ -28,6 +28,7 @@ const initialState: ExchangeStatesType = {
   fromAmount: '',
   toAmount: '',
   exchangeRate: 1.2,
+  error: '',
 };
 
 const exchangeSlice = createSlice({
@@ -35,7 +36,7 @@ const exchangeSlice = createSlice({
   initialState,
   reducers: {
     exchangeCurrency(state) {
-      if (Number(state.fromAmount) <= state.wallets[state.fromWallet].balance) {
+      if (Number(state.fromAmount) <= state.wallets[state.fromWallet].balance && state.fromWallet !== state.toWallet) {
         state.wallets[state.fromWallet].balance -= Number(state.fromAmount);
         state.wallets[state.toWallet].balance += Number(state.toAmount);
         state.fromAmount = '';
@@ -49,13 +50,19 @@ const exchangeSlice = createSlice({
         state.toWallet = action.payload.wallet;
       }
     },
-    changeFromAmount(state, action: PayloadAction<string>) {
-      state.fromAmount = action.payload;
-      state.toAmount = Number(action.payload) > 0 ? Number(state.exchangeRate * Number(action.payload)).toFixed(2) : '';
-    },
-    changeToAmount(state, action: PayloadAction<string>) {
-      state.toAmount = action.payload;
-      state.fromAmount = Number(action.payload) > 0 ? Number(state.exchangeRate * Number(action.payload)).toFixed(2) : '';
+    changeAmount(state, action: PayloadAction<{ type: 'FROM' | 'TO', amount: string }>) {
+      if (action.payload.type === 'FROM') {
+        state.fromAmount = action.payload.amount;
+        state.toAmount = Number(action.payload.amount) > 0 ? Number(state.exchangeRate * Number(action.payload.amount)).toFixed(2) : '';
+      } else {
+        state.toAmount = action.payload.amount;
+        state.fromAmount = Number(action.payload.amount) > 0 ? Number(state.exchangeRate * Number(action.payload.amount)).toFixed(2) : '';
+      }
+      if (Number(state.fromAmount) > state.wallets[state.fromWallet].balance) {
+        state.error = 'Exceeds balance';
+      } else {
+        state.error = '';
+      }
     },
     setExchangeRate(state, action: PayloadAction<number>) {
       state.exchangeRate = action.payload;
@@ -65,5 +72,5 @@ const exchangeSlice = createSlice({
 
 export default exchangeSlice.reducer;
 export const {
-  exchangeCurrency, selectWallet, changeFromAmount, changeToAmount, setExchangeRate,
+  exchangeCurrency, selectWallet, changeAmount, setExchangeRate,
 } = exchangeSlice.actions;
