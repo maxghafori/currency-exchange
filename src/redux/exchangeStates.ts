@@ -57,10 +57,13 @@ const exchangeSlice = createSlice({
       state.toAmount = action.payload;
       state.fromAmount = Number(action.payload) > 0 ? Number(state.exchangeRate * Number(action.payload)).toFixed(2) : '';
     },
+    setExchangeRate(state, action: PayloadAction<number>) {
+      state.exchangeRate = action.payload;
+    },
   },
 });
 
 export default exchangeSlice.reducer;
 export const {
-  exchangeCurrency, selectWallet, changeFromAmount, changeToAmount,
+  exchangeCurrency, selectWallet, changeFromAmount, changeToAmount, setExchangeRate,
 } = exchangeSlice.actions;
