@@ -1,6 +1,6 @@
 {
   "name": "currency-exchange",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "http://maxghafori.github.io/currency-exchange",
   "scripts": {
     "start": "expo start --dev-client",
