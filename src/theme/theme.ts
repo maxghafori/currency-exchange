@@ -1,6 +1,6 @@
 import { DefaultTheme } from 'styled-components/native';
 
-const myTheme: DefaultTheme = {
+export const theme: DefaultTheme = {
   size: {
     maxWidth: '500px',
     maxWidthPercent: '90%',
@@ -15,5 +15,3 @@ const myTheme: DefaultTheme = {
   },
 
 };
-
-export default myTheme;

@@ -25,12 +25,14 @@ export const WalletsModals = ({ open, onClose, onWalletClick }:WalletsModalProps
     />
   ), [onClose, onWalletClick]);
 
+  const keyExtractor = useCallback((item) => item.code, []);
+
   return (
     <Modal animationType="slide" transparent visible={open} onRequestClose={onClose}>
       <CenteredView onPress={onClose}>
         <ModalContainer>
           <ModalTitle>Wallets</ModalTitle>
-          <FlatList data={Object.values(currencies)} renderItem={renderItem} />
+          <FlatList data={Object.values(currencies)} renderItem={renderItem} keyExtractor={keyExtractor} />
         </ModalContainer>
       </CenteredView>
     </Modal>
