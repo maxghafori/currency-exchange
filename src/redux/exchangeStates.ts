@@ -28,7 +28,7 @@ const initialState: ExchangeStatesType = {
   toWallet: 'EUR',
   fromAmount: '',
   toAmount: '',
-  exchangeRate: 1.2,
+  exchangeRate: 0.87,
   error: '',
 };
 
@@ -67,6 +67,7 @@ const exchangeSlice = createSlice({
     },
     setExchangeRate(state, action: PayloadAction<number>) {
       state.exchangeRate = action.payload;
+      state.toAmount = Number(state.fromAmount) > 0 ? truncate(state.exchangeRate * Number(state.fromAmount)) : '';
     },
     switchWallet(state) {
       const temp = state.toWallet;
@@ -78,5 +79,5 @@ const exchangeSlice = createSlice({
 
 export default exchangeSlice.reducer;
 export const {
-  exchangeCurrency,switchWallet, selectWallet, changeAmount, setExchangeRate,
+  exchangeCurrency, switchWallet, selectWallet, changeAmount, setExchangeRate,
 } = exchangeSlice.actions;

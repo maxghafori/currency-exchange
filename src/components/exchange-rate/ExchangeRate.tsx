@@ -4,6 +4,7 @@ import { RootState, setExchangeRate, switchWallet } from 'src/redux';
 import { useExchangeRate } from 'src/api';
 import { truncate } from 'src/utils/number';
 import { ChangeIcon } from 'src/icons';
+import { ActivityIndicator } from 'react-native';
 import {
   BackLine, Container, RateText, RateWrapper, FloatButton,
 } from './ExchangeRate.styles';
@@ -14,7 +15,7 @@ export const ExchangeRate = () => {
   const exchangeRate = useSelector((root:RootState) => root.exchangeState.exchangeRate);
   const dispatch = useDispatch();
 
-  const { data: rate } = useExchangeRate(fromWallet, toWallet);
+  const { data: rate, isError, isLoading } = useExchangeRate(fromWallet, toWallet);
 
   useEffect(() => {
     if (rate) {
@@ -26,12 +27,11 @@ export const ExchangeRate = () => {
     <Container>
       <BackLine />
       <RateWrapper>
-        <RateText>{`1 ${fromWallet} = ${truncate(exchangeRate)} ${toWallet}`}</RateText>
+        {!isLoading ? <RateText>{!isError ? `1 ${fromWallet} = ${truncate(exchangeRate)} ${toWallet}` : 'API Error!'}</RateText> : <ActivityIndicator />}
       </RateWrapper>
       <FloatButton onPress={() => dispatch(switchWallet())}>
         <ChangeIcon />
       </FloatButton>
-
     </Container>
   );
 };
