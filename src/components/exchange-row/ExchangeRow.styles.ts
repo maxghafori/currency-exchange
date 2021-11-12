@@ -18,6 +18,7 @@ export const InputWrapper = styled.View`
 
 export const AmountInput = styled.TextInput`
   padding: 10px;
+  min-width: 100px;
 `;
 
 export const Type = styled.Text`

@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, setExchangeRate } from 'src/redux';
+import { RootState, setExchangeRate, switchWallet } from 'src/redux';
 import { useExchangeRate } from 'src/api';
+import { truncate } from 'src/utils/number';
+import { ChangeIcon } from 'src/icons';
 import {
-  BackLine, Container, RateText, RateWrapper,
+  BackLine, Container, RateText, RateWrapper, FloatButton,
 } from './ExchangeRate.styles';
 
 export const ExchangeRate = () => {
@@ -16,7 +18,7 @@ export const ExchangeRate = () => {
 
   useEffect(() => {
     if (rate) {
-      dispatch(setExchangeRate(Number(Number(rate[`${fromWallet}_${toWallet}`]).toFixed(2))));
+      dispatch(setExchangeRate(rate[`${fromWallet}_${toWallet}`]));
     }
   }, [dispatch, fromWallet, rate, toWallet]);
 
@@ -24,8 +26,12 @@ export const ExchangeRate = () => {
     <Container>
       <BackLine />
       <RateWrapper>
-        <RateText>{`1 ${fromWallet} = ${exchangeRate} ${toWallet}`}</RateText>
+        <RateText>{`1 ${fromWallet} = ${truncate(exchangeRate)} ${toWallet}`}</RateText>
       </RateWrapper>
+      <FloatButton onPress={() => dispatch(switchWallet())}>
+        <ChangeIcon />
+      </FloatButton>
+
     </Container>
   );
 };

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
-export const DropDown = () => (
+export const DropDownIcon = () => (
   <Svg width={24} height={24} fill="none">
     <Path
       fillRule="evenodd"

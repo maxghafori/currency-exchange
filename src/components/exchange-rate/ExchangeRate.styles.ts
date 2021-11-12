@@ -29,3 +29,17 @@ export const RateText = styled.Text`
   font-size: 14px;
   text-align: center;
 `;
+
+export const FloatButton = styled.Pressable`
+  position: absolute;
+  background-color: ${(props) => props.theme.colors.card};
+  width: 40px;
+  height: 40px;
+  border-width: 1px;
+  border-color: lightgrey;
+  right: 10px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  padding: 10px;
+`;

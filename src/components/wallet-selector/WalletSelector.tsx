@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { DropDown } from 'src/icons';
+import { DropDownIcon } from 'src/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, selectWallet } from 'src/redux';
 import {
@@ -21,7 +21,7 @@ export const WalletSelector = ({ type }:WalletSelectorProps) => {
     <SelectorWrapper onPress={() => setModalToggle(true)}>
       <Row>
         <Title>{selectedWallet}</Title>
-        <DropDown />
+        <DropDownIcon />
       </Row>
       <SubTitle>{`Balance: ${wallets[selectedWallet].balance}`}</SubTitle>
       <WalletsModals open={modalToggle} onClose={() => setModalToggle(false)} onWalletClick={(wallet) => dispatch(selectWallet({ type, wallet: Object.keys(wallet)[0] }))} />
